@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <task.h>
 
+#define OUT_PIN 5
+#define DELAY_MS 50
+
 void main_task(__unused void *params) {
   int toggle = 0;
   while (1) {

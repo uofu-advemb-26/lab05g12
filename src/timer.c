@@ -2,6 +2,9 @@
 #include <pico/sync.h>
 #include <stdio.h>
 
+#define OUT_PIN 5
+#define DELAY_MS 50
+
 int toggle = 1;
 bool timer_callback(__unused struct repeating_timer *t) {
   toggle = !toggle;

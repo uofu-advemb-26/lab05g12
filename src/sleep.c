@@ -1,6 +1,9 @@
 #include <pico/stdlib.h>
 #include <stdio.h>
 
+#define OUT_PIN 5
+#define DELAY_MS 50
+
 int main(void) {
   int toggle = 0;
   stdio_init_all();
