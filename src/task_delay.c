@@ -2,6 +2,7 @@
 #include <pico/stdlib.h>
 #include <stdio.h>
 #include <task.h>
+#include <pico/sync.h>
 
 #define OUT_PIN 5
 #define DELAY_MS 50
@@ -10,6 +11,9 @@ void main_task(__unused void *params) {
   int toggle = 0;
   while (1) {
     toggle = !toggle;
+    for (int i = 0; i < 100000; i++){
+    __nop();
+  }
     gpio_put(OUT_PIN, toggle);
     vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
   }
