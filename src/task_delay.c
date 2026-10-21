@@ -19,14 +19,24 @@ void main_task(__unused void *params) {
   }
 }
 
+void side_task(__unused void *params) {
+while(1){
+  vTaskDelay(1);
+}
+}
+
+
 int main(void) {
   stdio_init_all();
   gpio_init(OUT_PIN);
   gpio_set_dir(OUT_PIN, GPIO_OUT);
   const char *rtos_name = "FreeRTOS";
-  TaskHandle_t task;
+  TaskHandle_t task, side_task_handle;
   xTaskCreate(main_task, "MainThread", configMINIMAL_STACK_SIZE, NULL,
               tskIDLE_PRIORITY + 1UL, &task);
+
+  xTaskCreate(side_task, "SideTask", configMINIMAL_STACK_SIZE, NULL,
+              tskIDLE_PRIORITY + 1UL, &side_task_handle);
   vTaskStartScheduler();
   return 0;
 }

@@ -3,6 +3,7 @@ add_executable(hello_freertos hello_freertos.c)
 add_executable(timer timer.c)
 add_executable(task_delay task_delay.c)
 add_executable(sleep sleep.c)
+add_executable(gpio_interrupt gpio_interrupt.c)
 
 pico_set_program_name(hello_freertos "test")
 pico_set_program_version(hello_freertos "0.1")
@@ -25,6 +26,9 @@ target_link_libraries(
 target_link_libraries(
   sleep PRIVATE pico_stdlib pico_multicore pico_async_context_freertos
                 FreeRTOS-Kernel-Heap4)
+target_link_libraries(
+  gpio_interrupt PRIVATE pico_stdlib pico_multicore pico_async_context_freertos
+                         FreeRTOS-Kernel-Heap4)
 
 # The CYW43 is the Wifi/Bluetooth module. If the board is set to pico_w, this
 # variable will be set and the wireless libraries added.
@@ -34,6 +38,7 @@ if(PICO_CYW43_SUPPORTED)
   target_link_libraries(timer PRIVATE pico_cyw43_arch_none)
   target_link_libraries(task_delay PRIVATE pico_cyw43_arch_none)
   target_link_libraries(sleep PRIVATE pico_cyw43_arch_none)
+  target_link_libraries(gpio_interrupt PRIVATE pico_cyw43_arch_none)
 endif()
 
 # Another pico macro which generates the uf2 file in addition to the elf
